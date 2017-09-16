@@ -2,8 +2,6 @@ let async = require("async");
 module.exports = function(app)
 {
     let coffeeShopsDs = app.dataSources.MyMongoDS;
-    let reviewDs = app.dataSources.MongoDSReview;
-    console.log("ReviewDs " + reviewDs);
 
     function apply(err, results)
     {
@@ -15,12 +13,6 @@ module.exports = function(app)
             console.log("> models created successfully");
         })
     }
-
-    async.parallel(
-    {
-        reviewers: async.apply(createReviewers),
-        coffeeShops: async.apply(createCoffeeShops),
-    }, apply);
 
 
     function createCoffeeShops(output)
@@ -52,6 +44,7 @@ module.exports = function(app)
         coffeeShopsDs.automigrate('CoffeeShop', migrate);
     }
 
+    let reviewDs = app.dataSources.MongoDSReview;
     function createReviewers(output)
     {
         let migrate = function(err)
@@ -128,4 +121,9 @@ module.exports = function(app)
         reviewDs.automigrate("Review", migrate);
     }
 
+    async.parallel(
+    {
+        reviewers: async.apply(createReviewers),
+        coffeeShops: async.apply(createCoffeeShops),
+    }, apply);
 };
