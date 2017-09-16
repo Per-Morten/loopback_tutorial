@@ -12,5 +12,15 @@
     "name": "MyMongoDS",
     "user": "user",
     "connector": "mongodb"
+  },
+  "MongoDSReview": {
+    "host": "localhost",
+    "port": 27017,
+    "url": "",
+    "database": "MongoDatabaseReview",
+    "password": "",
+    "name": "MongoDSReview",
+    "user": "user",
+    "connector": "mongodb"
   }
 }
